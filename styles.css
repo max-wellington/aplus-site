@@ -3017,22 +3017,22 @@ h2 {
     .review-card {
         min-width: 100% !important;
         width: 100% !important;
-        padding: 10px 12px !important;
+        padding: 15px 18px !important;
         justify-content: flex-start !important;
     }
 
     .review-stars {
         font-size: 0.85rem !important;
-        margin-bottom: 4px !important;
+        margin-bottom: 8px !important;
         letter-spacing: 1px !important;
     }
 
     .review-text {
         font-size: 0.76rem !important;
-        line-height: 1.25 !important;
-        margin-bottom: 6px !important;
+        line-height: 1.4 !important;
+        margin-bottom: 10px !important;
         padding: 0 5px !important;
-        max-height: 120px !important;
+        max-height: 180px !important;
         overflow: hidden !important;
     }
 
@@ -3042,20 +3042,20 @@ h2 {
     }
 
     .review-author {
-        padding-top: 4px !important;
-        margin-top: 0 !important;
+        padding-top: 8px !important;
+        margin-top: 8px !important;
         margin-bottom: 0 !important;
         border-top-width: 1px !important;
         flex-shrink: 0 !important;
     }
 
     .reviews-section .review-card .review-author {
-        margin-top: 0 !important;
+        margin-top: 8px !important;
     }
 
     .review-author-name {
         font-size: 0.72rem !important;
-        margin-bottom: 1px !important;
+        margin-bottom: 2px !important;
     }
 
     .review-date {
@@ -3197,10 +3197,17 @@ h2 {
         padding: 25px 20px !important;
     }
 
-    .contact-section .container,
-    .contact-wrapper {
+    .contact-section .container {
         padding-left: 15px !important;
         padding-right: 15px !important;
+    }
+
+    .contact-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 
     /* Modal responsive styles */
