@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - APlus Carwash & Detailing</title>
+    <meta name="description" content="View our gallery of professional car detailing and wash services in Tampa, FL.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Kaushan+Script&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <a href="index.html" class="nav-logo">
+                    <img src="images/banner.png" alt="A Plus Mobile Carwash Logo">
+                </a>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="shop.html" class="nav-link">Pricing</a></li>
+                    <li><a href="gallery.html" class="nav-link active">Gallery</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero hero-gallery">
+        <div class="hero-background-image"></div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <p class="eyebrow-text">Our Work</p>
+                <h1>Gallery</h1>
+                <p class="hero-subtitle">Browse our collection of professionally detailed vehicles</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="photos-section">
+        <div class="container">
+            <div class="photos-grid">
+                <div class="photo-item" data-index="0">
+                    <img src="images/rs=w_1160,h_870 (1).webp" alt="Detailing Photo 1" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="1">
+                    <img src="images/rs=w_1160,h_870 (2).webp" alt="Detailing Photo 2" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="2">
+                    <img src="images/rs=w_1160,h_870 (3).webp" alt="Detailing Photo 3" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="3">
+                    <img src="images/rs=w_1160,h_870 (4).webp" alt="Detailing Photo 4" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="4">
+                    <img src="images/rs=w_1160,h_870 (5).webp" alt="Detailing Photo 5" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="5">
+                    <img src="images/rs=w_1160,h_872.webp" alt="Detailing Photo 6" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="6">
+                    <img src="images/rs=w_1160,h_870 (1).webp" alt="Detailing Photo 7" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="7">
+                    <img src="images/rs=w_1160,h_870 (2).webp" alt="Detailing Photo 8" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="8">
+                    <img src="images/rs=w_1160,h_870 (3).webp" alt="Detailing Photo 9" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="9">
+                    <img src="images/rs=w_1160,h_870 (4).webp" alt="Detailing Photo 10" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="10">
+                    <img src="images/rs=w_1160,h_870 (5).webp" alt="Detailing Photo 11" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="11">
+                    <img src="images/rs=w_1160,h_872.webp" alt="Detailing Photo 12" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="12">
+                    <img src="images/rs=w_1160,h_870 (1).webp" alt="Detailing Photo 13" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="13">
+                    <img src="images/rs=w_1160,h_870 (2).webp" alt="Detailing Photo 14" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="14">
+                    <img src="images/rs=w_1160,h_870 (3).webp" alt="Detailing Photo 15" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="15">
+                    <img src="images/rs=w_1160,h_870 (4).webp" alt="Detailing Photo 16" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="16">
+                    <img src="images/rs=w_1160,h_870 (5).webp" alt="Detailing Photo 17" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="17">
+                    <img src="images/rs=w_1160,h_872.webp" alt="Detailing Photo 18" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Modal/Carousel -->
+    <div id="imageModal" class="image-modal">
+        <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+        <button class="modal-nav modal-prev" id="modalPrev" aria-label="Previous image">&#8249;</button>
+        <button class="modal-nav modal-next" id="modalNext" aria-label="Next image">&#8250;</button>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Detailing Photo">
+        </div>
+        <div class="modal-info">
+            <span id="imageCounter">1 / 18</span>
+        </div>
+        <div class="modal-dots">
+            <!-- Dots will be generated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Copyright © 2025 A Plus Mobile Carwash - All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms and Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+

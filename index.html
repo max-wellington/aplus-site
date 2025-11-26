@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APlus Carwash & Detailing</title>
+    <meta name="description" content="Quality car care with over 10 years of experience. Best mobile detailing service in Tampa, FL.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Kaushan+Script&display=swap" rel="stylesheet">
+    <!-- Google Reviews Config -->
+    <script>
+        window.GOOGLE_REVIEWS_CONFIG = {
+            // Third-party API service configuration
+            // Options: 'serpapi', 'scraperapi', 'brightdata', 'custom'
+            apiService: 'serpapi',
+            
+            // API Key for the third-party service (get from their website)
+            apiKey: 'YOUR_SERPAPI_KEY_HERE', // Replace with your SerpAPI key
+            
+            // Google Maps URL for your business
+            mapsUrl: 'https://www.google.com/maps/place/A+Plus+Car+Wash+and+Detailing+-+Columbus/@27.9665296,-82.4980061,16z/data=!4m8!3m7!1s0x88c2c3978bbbdc47:0xfd11327e7031eb18!8m2!3d27.9665296!4d-82.4954312!9m1!1b1!16s%2Fg%2F11dfkz8l4w?entry=ttu',
+            
+            // Business information
+            businessName: 'APlus Car Wash and Detailing',
+            placeId: 'ChIJ...', // Optional: Google Place ID if you have it
+            
+            // Custom API endpoint (if using custom service)
+            customApiEndpoint: null
+        };
+    </script>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <a href="index.html" class="nav-logo">
+                    <img src="images/banner.png" alt="A Plus Mobile Carwash Logo">
+                </a>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="shop.html" class="nav-link">Pricing</a></li>
+                    <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-slideshow">
+            <div class="hero-slide active"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <p class="eyebrow-text">Tampa's Premier Detailing Service</p>
+                <h1>Professional Car Detailing & Wash Services</h1>
+                <p class="hero-subtitle">Experience premium automotive care with over a decade of expertise. We bring exceptional detailing services directly to you.</p>
+                <a href="#contact" class="btn btn-primary">Schedule Your Service</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photos Section -->
+    <section id="photos" class="photos-section">
+        <div class="container">
+            <p class="eyebrow-text">Our Work</p>
+            <h2 class="section-title">Slick Finish Detailing Photos</h2>
+            <div class="photos-grid">
+                <div class="photo-item" data-index="0">
+                    <img src="images/rs=w_1160,h_870 (1).webp" alt="Detailing Photo 1" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="1">
+                    <img src="images/rs=w_1160,h_870 (2).webp" alt="Detailing Photo 2" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="2">
+                    <img src="images/rs=w_1160,h_870 (3).webp" alt="Detailing Photo 3" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="3">
+                    <img src="images/rs=w_1160,h_870 (4).webp" alt="Detailing Photo 4" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="4">
+                    <img src="images/rs=w_1160,h_870 (5).webp" alt="Detailing Photo 5" loading="lazy">
+                </div>
+                <div class="photo-item" data-index="5">
+                    <img src="images/rs=w_1160,h_872.webp" alt="Detailing Photo 6" loading="lazy">
+                </div>
+            </div>
+            <div class="photos-section-cta">
+                <a href="gallery.html" class="btn btn-primary">View More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews-section">
+        <div class="container">
+            <p class="eyebrow-text">Testimonials</p>
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="reviews-carousel-wrapper">
+                <button class="carousel-btn carousel-prev" id="reviewsPrev" aria-label="Previous review">&#8249;</button>
+                <div class="reviews-carousel" id="reviewsCarousel">
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Excellent service! My car looks brand new. The team was professional and did an amazing job. Highly recommend!"</p>
+                        <div class="review-author">
+                            <div class="review-author-name">John D.</div>
+                            <div class="review-date">2 weeks ago</div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Best mobile car wash in Tampa! They came right to my office and did a fantastic job. Worth every penny."</p>
+                        <div class="review-author">
+                            <div class="review-author-name">Sarah M.</div>
+                            <div class="review-date">1 month ago</div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Fast, professional, and thorough. My vehicle has never looked better. Will definitely use again!"</p>
+                        <div class="review-author">
+                            <div class="review-author-name">Mike T.</div>
+                            <div class="review-date">3 weeks ago</div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Outstanding work! They pay attention to every detail. The car wash was thorough and my car shines!"</p>
+                        <div class="review-author">
+                            <div class="review-author-name">Lisa K.</div>
+                            <div class="review-date">1 week ago</div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Amazing service and great value. The team was friendly and my car looks perfect. Highly satisfied!"</p>
+                        <div class="review-author">
+                            <div class="review-author-name">Robert P.</div>
+                            <div class="review-date">2 months ago</div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"The ceramic coating service was exceptional. My car is protected and looks incredible. These guys know their stuff!"</p>
+                        <div class="review-author">
+                            <div class="review-author-name">David L.</div>
+                            <div class="review-date">3 weeks ago</div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"I've tried several detailing services in Tampa, but A Plus Mobile is by far the best. Attention to detail is unmatched."</p>
+                        <div class="review-author">
+                            <div class="review-author-name">Jennifer W.</div>
+                            <div class="review-date">1 week ago</div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Professional, punctual, and thorough. They transformed my truck from dull to showroom quality. Worth every dollar!"</p>
+                        <div class="review-author">
+                            <div class="review-author-name">Mark S.</div>
+                            <div class="review-date">4 days ago</div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Outstanding customer service and incredible results. They went above and beyond to make sure I was happy. Will definitely return!"</p>
+                        <div class="review-author">
+                            <div class="review-author-name">Amanda R.</div>
+                            <div class="review-date">5 days ago</div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"The engine bay cleaning was impressive - looks brand new! Very reasonable pricing for the quality of work provided."</p>
+                        <div class="review-author">
+                            <div class="review-author-name">Thomas H.</div>
+                            <div class="review-date">1 month ago</div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Prompt, professional, and price-competitive. My car has never been cleaner. The interior detailing was exceptional!"</p>
+                        <div class="review-author">
+                            <div class="review-author-name">Nicole B.</div>
+                            <div class="review-date">2 weeks ago</div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Great communication from booking to completion. They took care of my vehicle like it was their own. Highly recommend to anyone!"</p>
+                        <div class="review-author">
+                            <div class="review-author-name">Christopher M.</div>
+                            <div class="review-date">6 days ago</div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"The clay bar treatment made a huge difference. Paint feels smooth as glass now. Very knowledgeable team and excellent service!"</p>
+                        <div class="review-author">
+                            <div class="review-author-name">Michelle F.</div>
+                            <div class="review-date">1 week ago</div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Scheduled same-day service and they delivered. My car looks amazing and the convenience of mobile service is unbeatable!"</p>
+                        <div class="review-author">
+                            <div class="review-author-name">James K.</div>
+                            <div class="review-date">3 days ago</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn carousel-next" id="reviewsNext" aria-label="Next review">&#8250;</button>
+            </div>
+            <div class="reviews-dots" id="reviewsDots"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="about-background-overlay"></div>
+        <div class="container">
+            <p class="eyebrow-text">About Us</p>
+            <h2 class="section-title">Our Mission</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>At APlus Carwash & Detailing, we are dedicated to delivering exceptional automotive detailing services that consistently exceed our customers' expectations. With over a decade of industry experience, we take pride in providing the highest quality results with every service we perform.</p>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                                    <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                                </svg>
+                            </div>
+                            <h4>Mobile Service</h4>
+                            <p>Convenient on-site detailing at your location</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="0">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <h4>10+ Years Experience</h4>
+                            <p>Trusted professionals with proven expertise</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                </svg>
+                            </div>
+                            <h4>Quality Results</h4>
+                            <p>Premium service that exceeds expectations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Modal/Carousel -->
+    <div id="imageModal" class="image-modal">
+        <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+        <button class="modal-nav modal-prev" id="modalPrev" aria-label="Previous image">&#8249;</button>
+        <button class="modal-nav modal-next" id="modalNext" aria-label="Next image">&#8250;</button>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Detailing Photo">
+        </div>
+        <div class="modal-info">
+            <span id="imageCounter">1 / 6</span>
+        </div>
+        <div class="modal-dots">
+            <!-- Dots will be generated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Locations Section -->
+    <section class="locations-section">
+        <div class="container">
+            <p class="eyebrow-text">Find Us</p>
+            <h2 class="section-title">Our Locations</h2>
+            <div class="locations-grid">
+                <div class="location-card" data-location-image="images/stroefront1.webp">
+                    <div class="location-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <p class="location-address">2522 W Tampa Bay Blvd</p>
+                    <a href="https://maps.google.com/?q=2522+W+Tampa+Bay+Blvd+%231864" target="_blank" class="location-link">Get Directions →</a>
+                </div>
+                <div class="location-card" data-location-image="images/3204-location.png">
+                    <div class="location-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <p class="location-address">3204 W Columbus Dr</p>
+                    <a href="https://maps.google.com/?q=3204+W+Columbus+Dr" target="_blank" class="location-link">Get Directions →</a>
+                </div>
+                <div class="location-card" data-location-image="images/armenia-location.webp">
+                    <div class="location-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <p class="location-address">6410 N Armenia Ave</p>
+                    <a href="https://maps.google.com/?q=6410+N+Armenia+Ave" target="_blank" class="location-link">Get Directions →</a>
+                </div>
+                <div class="location-card" data-location-image="images/dale-location.webp">
+                    <div class="location-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <p class="location-address">6101 S Dale Mabry Hwy</p>
+                    <a href="https://maps.google.com/?q=6101+S+Dale+Mabry+Hwy" target="_blank" class="location-link">Get Directions →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <p class="eyebrow-text">Get In Touch</p>
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-wrapper">
+                <div class="contact-form-container">
+                    <h3>Send Us a Message</h3>
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="file">Attach Files</label>
+                            <input type="file" id="file" name="file" multiple>
+                            <p class="file-info">Attachments (0)</p>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                        <p class="form-note">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <h3 class="contact-info-heading">Contact Information</h3>
+                    <div class="info-card info-card-primary">
+                        <div class="contact-quick-info">
+                            <div class="quick-info-item">
+                                <div class="quick-info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                    </svg>
+                                </div>
+                                <div class="quick-info-content">
+                                    <h4>Call Us</h4>
+                                    <p class="phone">813-410-5953</p>
+                                    <p class="phone">813-802-1909</p>
+                                </div>
+                            </div>
+                            <div class="quick-info-item">
+                                <div class="quick-info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="quick-info-content">
+                                    <h4>Email Us</h4>
+                                    <p class="email"><a href="mailto:apluscarwash.detailing@gmail.com">apluscarwash.detailing@gmail.com</a></p>
+                                </div>
+                            </div>
+                            <div class="quick-info-item">
+                                <div class="quick-info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="quick-info-content">
+                                    <h4>Business Hours</h4>
+                                    <p>Mon-Wed: 08:00 am – 07:00 pm</p>
+                                    <p>Thu-Sun: 08:00 am – 07:30 pm</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="contact-note">We value our customers and are here to help. Contact us to schedule your service or inquire about our detailing packages.</p>
+                        <div class="social-media">
+                            <a href="https://www.facebook.com/apluscarwashtampabay/" target="_blank" rel="noopener noreferrer" class="social-icon facebook-icon" aria-label="Visit our Facebook page">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                                <span>Follow us on Facebook</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Copyright © 2025 A Plus Mobile Carwash - All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms and Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
