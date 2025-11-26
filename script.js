@@ -68,14 +68,25 @@ document.addEventListener('DOMContentLoaded', function() {
         const scrollSpeed = 0.5; // pixels per frame (adjust for speed)
         let animationId = null;
         let isPaused = false;
+        let cachedCardWidth = 0;
+        let cachedSetWidth = 0;
         
-        function getCardWidth() {
+        function calculateCardWidth() {
             const firstCard = reviewsCarousel.querySelector('.review-card');
             if (firstCard) {
-                return firstCard.offsetWidth + 20; // Include margin
+                const cardWidth = firstCard.offsetWidth;
+                const styles = window.getComputedStyle(firstCard);
+                const marginLeft = parseFloat(styles.marginLeft) || 0;
+                const marginRight = parseFloat(styles.marginRight) || 0;
+                cachedCardWidth = cardWidth + marginLeft + marginRight;
+                cachedSetWidth = cachedCardWidth * totalReviews;
+                return true;
             }
-            return 0;
+            return false;
         }
+        
+        // Initialize card width
+        calculateCardWidth();
         
         function infiniteScroll() {
             if (isPaused) {
@@ -83,15 +94,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            const cardWidth = getCardWidth();
-            const originalSetWidth = cardWidth * totalReviews;
+            // Recalculate card width periodically to handle responsive changes
+            if (scrollPosition % 100 < scrollSpeed) {
+                calculateCardWidth();
+            }
+            
+            if (cachedCardWidth === 0 || cachedSetWidth === 0) {
+                if (!calculateCardWidth()) {
+                    animationId = requestAnimationFrame(infiniteScroll);
+                    return;
+                }
+            }
             
             scrollPosition += scrollSpeed;
             
             // Reset scroll position seamlessly when we've scrolled through one full set
             // Since we have 3 sets (original + 2 clones), we can reset when reaching the end of first set
-            if (scrollPosition >= originalSetWidth) {
-                scrollPosition = scrollPosition - originalSetWidth;
+            if (scrollPosition >= cachedSetWidth) {
+                scrollPosition = scrollPosition - cachedSetWidth;
+                // Ensure we don't go negative
+                if (scrollPosition < 0) scrollPosition = 0;
             }
             
             reviewsCarousel.scrollLeft = scrollPosition;
@@ -107,9 +129,12 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
+                // Recalculate card width on resize
+                calculateCardWidth();
                 // Reset scroll position on resize to prevent issues
-                scrollPosition = 0;
-                reviewsCarousel.scrollLeft = 0;
+                scrollPosition = scrollPosition % cachedSetWidth;
+                if (scrollPosition < 0) scrollPosition = 0;
+                reviewsCarousel.scrollLeft = scrollPosition;
             }, 250);
         });
     }
