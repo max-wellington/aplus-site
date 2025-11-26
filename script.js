@@ -287,6 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const name = formData.get('name');
             const email = formData.get('email');
             const message = formData.get('message');
+            const files = formData.getAll('file');
             
             // Basic validation
             if (!name || !email || !message) {
@@ -301,8 +302,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Simulate form submission (in production, this would send to a server)
-            alert('Thank you for your message! We will get back to you soon.');
+            // Prepare email content
+            const subject = encodeURIComponent('Contact Form Submission from ' + name);
+            const body = encodeURIComponent(
+                'Name: ' + name + '\n\n' +
+                'Email: ' + email + '\n\n' +
+                'Message:\n' + message +
+                (files.length > 0 ? '\n\nNote: Attachments cannot be sent via mailto. Please ask customer to email directly if files are needed.' : '')
+            );
+            const recipient = 'apluscarwash.detailing@gmail.com';
+            
+            // Open mailto link to send email
+            const mailtoLink = 'mailto:' + recipient + '?subject=' + subject + '&body=' + body;
+            window.location.href = mailtoLink;
+            
+            // Show confirmation message
+            setTimeout(() => {
+                alert('Thank you for your message! Your email client should open. If it doesn\'t, please email us directly at ' + recipient);
+            }, 500);
+            
+            // Reset form
             contactForm.reset();
             
             // Update file attachment count
@@ -516,7 +535,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 card.addEventListener('mouseleave', function() {
-                    // Wait 1 second before reverting
+                    // Wait 0.1s before reverting
                     hoverTimeout = setTimeout(() => {
                         // Fade out by removing the class
                         locationsSection.classList.remove('has-bg');
@@ -527,9 +546,302 @@ document.addEventListener('DOMContentLoaded', function() {
                             }
                         }, 300);
                         hoverTimeout = null;
-                    }, 1000);
+                    }, 200);
                 });
             }
+        });
+        
+        // Initialize locations section animations on all pages (not just home page)
+        const locationsSectionTitle = locationsSection.querySelector('.section-title');
+        const locationsEyebrow = locationsSection.querySelector('.eyebrow-text');
+        const locationsCards = locationsSection.querySelectorAll('.location-card');
+        
+        // Add animation classes
+        if (locationsSectionTitle) {
+            locationsSectionTitle.classList.add('fade-in-left');
+        }
+        if (locationsEyebrow) {
+            locationsEyebrow.classList.add('fade-in-left');
+        }
+        locationsCards.forEach(card => {
+            card.classList.add('fade-in');
+        });
+        
+        // Set up intersection observer for locations section on all pages
+        const ioOptions = {
+            threshold: 0.25,
+            rootMargin: '0px 0px -10% 0px'
+        };
+        
+        const locationsIO = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                
+                const el = entry.target;
+                el.classList.add('is-visible');
+                
+                // If it's the section title, also reveal eyebrow and underline
+                if (el === locationsSectionTitle && locationsEyebrow) {
+                    setTimeout(() => {
+                        locationsEyebrow.classList.add('is-visible');
+                    }, 200);
+                }
+                
+                observer.unobserve(el);
+            });
+        }, ioOptions);
+        
+        // Observe locations section elements
+        if (locationsSectionTitle) {
+            locationsIO.observe(locationsSectionTitle);
+        }
+        if (locationsEyebrow) {
+            locationsIO.observe(locationsEyebrow);
+        }
+        locationsCards.forEach(card => {
+            locationsIO.observe(card);
+        });
+    }
+
+    // Initial animations for headings and images on the home page (triggered when in view)
+    const isHomePage = document.body && document.body.contains(document.querySelector('.hero'));
+    if (isHomePage) {
+        // Headings and key text elements
+        // Slide UP + fade for most headings
+        const slideUpHeadingSelectors = [
+            '.hero h1',
+            '.hero .hero-subtitle',
+            '.hero .btn-primary',
+            '#about .section-title',
+            '#about .about-text h3',
+            '.contact-section .section-title'
+        ];
+
+        // Slide LEFT + fade for photos + locations headings
+        const slideLeftHeadingSelectors = [
+            '#photos .section-title',
+            '.locations-section .section-title'
+        ];
+
+        // Slide RIGHT + fade for reviews heading
+        const slideRightHeadingSelectors = [
+            '#reviews .section-title'
+        ];
+
+        const slideUpHeadings = slideUpHeadingSelectors
+            .map(sel => Array.from(document.querySelectorAll(sel)))
+            .flat();
+
+        const slideLeftHeadings = slideLeftHeadingSelectors
+            .map(sel => Array.from(document.querySelectorAll(sel)))
+            .flat();
+
+        const slideRightHeadings = slideRightHeadingSelectors
+            .map(sel => Array.from(document.querySelectorAll(sel)))
+            .flat();
+
+        // Main headings (hero h1, section titles, Our Mission)
+        const mainHeadings = [
+            '.hero h1',
+            '#photos .section-title',
+            '#reviews .section-title',
+            '#about .section-title',
+            '#about .about-text h3',
+            '.locations-section .section-title',
+            '.contact-section .section-title'
+        ].map(sel => Array.from(document.querySelectorAll(sel))).flat();
+
+        // Eyebrows associated with headings
+        const eyebrowSelectors = [
+            '.hero .eyebrow-text',
+            '#photos .eyebrow-text',
+            '#reviews .eyebrow-text',
+            '#about .eyebrow-text',
+            '.locations-section .eyebrow-text',
+            '.contact-section .eyebrow-text'
+        ];
+
+        const eyebrowElements = eyebrowSelectors
+            .map(sel => Array.from(document.querySelectorAll(sel)))
+            .flat();
+
+        // Apply initial directional classes to headings
+        slideUpHeadings.forEach(el => {
+            el.classList.add('fade-in-up');
+        });
+
+        slideLeftHeadings.forEach(el => {
+            el.classList.add('fade-in-left');
+        });
+
+        slideRightHeadings.forEach(el => {
+            el.classList.add('fade-in-right');
+        });
+
+        const headingElements = [...slideUpHeadings, ...slideLeftHeadings, ...slideRightHeadings];
+
+        // Eyebrows associated with headings (directional fade)
+        const slideUpEyebrowSelectors = [
+            '.hero .eyebrow-text',
+            '#about .eyebrow-text',
+            '.contact-section .eyebrow-text'
+        ];
+
+        const slideLeftEyebrowSelectors = [
+            '#photos .eyebrow-text',
+            '.locations-section .eyebrow-text'
+        ];
+
+        const slideRightEyebrowSelectors = [
+            '#reviews .eyebrow-text'
+        ];
+
+        const slideUpEyebrows = slideUpEyebrowSelectors
+            .map(sel => Array.from(document.querySelectorAll(sel)))
+            .flat();
+
+        const slideLeftEyebrows = slideLeftEyebrowSelectors
+            .map(sel => Array.from(document.querySelectorAll(sel)))
+            .flat();
+
+        const slideRightEyebrows = slideRightEyebrowSelectors
+            .map(sel => Array.from(document.querySelectorAll(sel)))
+            .flat();
+
+        slideUpEyebrows.forEach(el => {
+            el.classList.add('fade-in-up');
+        });
+
+        slideLeftEyebrows.forEach(el => {
+            el.classList.add('fade-in-left');
+        });
+
+        slideRightEyebrows.forEach(el => {
+            el.classList.add('fade-in-right');
+        });
+
+        // Images and cards that fade in
+        const fadeSelectors = [
+            '.photos-section .photo-item img',
+            '.reviews-section .review-card',
+            '.locations-section .location-card',
+            '.contact-section .info-card'
+        ];
+
+        const fadeElements = fadeSelectors
+            .map(sel => Array.from(document.querySelectorAll(sel)))
+            .flat();
+
+        fadeElements.forEach(el => {
+            el.classList.add('fade-in');
+        });
+
+        // Use Intersection Observer so elements fade in when they come into view
+        const ioOptions = {
+            threshold: 0.25,
+            rootMargin: '0px 0px -10% 0px'
+        };
+
+        const io = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+
+                const el = entry.target;
+
+                const revealWithEyebrowAndUnderline = () => {
+                    el.classList.add('is-visible');
+
+                    const section = el.closest('section');
+                    if (section) {
+                        const eyebrow = section.querySelector('.eyebrow-text');
+
+                        setTimeout(() => {
+                            if (eyebrow) {
+                                eyebrow.classList.add('is-visible');
+                            }
+                            if (el.classList.contains('section-title')) {
+                                el.classList.add('underline-visible');
+                            }
+                        }, 150);
+                    }
+                };
+
+                // If this is a main heading, reveal it first, then eyebrow + underline after delay
+                if (mainHeadings.includes(el)) {
+                    revealWithEyebrowAndUnderline();
+                } else {
+                    // Regular fade-in for other observed elements
+                    el.classList.add('is-visible');
+                }
+
+                observer.unobserve(el);
+            });
+        }, ioOptions);
+
+        const allObserved = [...headingElements, ...fadeElements];
+
+        allObserved.forEach(el => {
+            io.observe(el);
+        });
+        
+        // Also handle background image fade-in for photos section when title becomes visible
+        const photosSectionTitle = document.querySelector('#photos .section-title');
+        if (photosSectionTitle) {
+            const photosSection = photosSectionTitle.closest('.photos-section');
+            
+            // Watch for when the title becomes visible and fade in the background
+            const titleObserver = new MutationObserver(() => {
+                if (photosSectionTitle.classList.contains('is-visible') && photosSection) {
+                    photosSection.classList.add('bg-fade-in');
+                    titleObserver.disconnect(); // Stop observing once triggered
+                }
+            });
+            
+            titleObserver.observe(photosSectionTitle, {
+                attributes: true,
+                attributeFilter: ['class']
+            });
+            
+            // Also check immediately in case it's already visible
+            if (photosSectionTitle.classList.contains('is-visible') && photosSection) {
+                photosSection.classList.add('bg-fade-in');
+            }
+        }
+
+        // Immediately handle elements already in view on initial page load
+        // Use requestAnimationFrame to ensure elements are painted in hidden state first
+        requestAnimationFrame(() => {
+            allObserved.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const inView = rect.top < window.innerHeight * 0.9 && rect.bottom > 0;
+                if (!inView) return;
+
+                // Force a reflow to ensure the element is painted in its hidden state
+                void el.offsetHeight;
+
+                if (mainHeadings.includes(el)) {
+                    const section = el.closest('section');
+                    const eyebrow = section ? section.querySelector('.eyebrow-text') : null;
+
+                    // Small delay so the heading starts hidden, then animates in
+                    setTimeout(() => {
+                        el.classList.add('is-visible');
+
+                        setTimeout(() => {
+                            if (eyebrow) {
+                                eyebrow.classList.add('is-visible');
+                            }
+                            if (el.classList.contains('section-title')) {
+                                el.classList.add('underline-visible');
+                            }
+                        }, 150);
+                    }, 50);
+                } else {
+                    el.classList.add('is-visible');
+                }
+
+                io.unobserve(el);
+            });
         });
     }
 });

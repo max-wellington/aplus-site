@@ -108,13 +108,15 @@ h2 {
     left: 0;
     right: 0;
     z-index: 999;
-    padding: 16px 0;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
+    padding: 10px 0;
+    transition: background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
     width: 100%;
 }
 
 .navbar.scrolled {
-    background: var(--bg-white);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     box-shadow: var(--shadow);
 }
 
@@ -135,11 +137,12 @@ h2 {
 }
 
 .nav-logo img {
-    height: 90px;
+    height: 75px;
     width: auto;
     max-width: 300px;
     display: block;
     object-fit: contain;
+    transition: height 0.3s ease;
 }
 
 .nav-logo:hover {
@@ -238,14 +241,15 @@ h2 {
 .hero {
     position: relative;
     color: white;
-    padding: 144px 0 40px;
+    padding: 144px 0 80px;
     text-align: center;
     overflow: visible;
-    min-height: 400px;
+    min-height: 80vh;
     display: flex;
     align-items: center;
     margin-top: 0;
     z-index: 1;
+    background: transparent;
 }
 
 .hero-slideshow {
@@ -257,6 +261,8 @@ h2 {
     z-index: 0;
     height: 100%;
     width: 100%;
+    overflow: hidden;
+    background: transparent;
 }
 
 .hero-slide {
@@ -355,6 +361,42 @@ h2 {
     z-index: 2;
 }
 
+/* Make hero headings visible on pricing, gallery, and contact pages (they don't use fade-in animations) */
+/* Override any animation classes that might be applied */
+.hero-pricing h1,
+.hero-pricing .hero-subtitle,
+.hero-pricing .eyebrow-text,
+.hero-gallery h1,
+.hero-gallery .hero-subtitle,
+.hero-gallery .eyebrow-text,
+.hero-contact h1,
+.hero-contact .hero-subtitle,
+.hero-contact .eyebrow-text {
+    opacity: 1 !important;
+}
+
+.hero-pricing h1.fade-in-up,
+.hero-pricing .hero-subtitle.fade-in-up,
+.hero-pricing .eyebrow-text.fade-in-up,
+.hero-gallery h1.fade-in-up,
+.hero-gallery .hero-subtitle.fade-in-up,
+.hero-gallery .eyebrow-text.fade-in-up,
+.hero-contact h1.fade-in-up,
+.hero-contact .hero-subtitle.fade-in-up,
+.hero-contact .eyebrow-text.fade-in-up,
+.hero-pricing h1.fade-in-up.is-visible,
+.hero-pricing .hero-subtitle.fade-in-up.is-visible,
+.hero-pricing .eyebrow-text.fade-in-up.is-visible,
+.hero-gallery h1.fade-in-up.is-visible,
+.hero-gallery .hero-subtitle.fade-in-up.is-visible,
+.hero-gallery .eyebrow-text.fade-in-up.is-visible,
+.hero-contact h1.fade-in-up.is-visible,
+.hero-contact .hero-subtitle.fade-in-up.is-visible,
+.hero-contact .eyebrow-text.fade-in-up.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
 .hero-slide:nth-child(4) {
     background-image: url('images/rs=w_1160,h_870 (4).webp');
 }
@@ -405,6 +447,82 @@ h2 {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Global Fade-in Animations */
+/* Ensure all elements that will fade in start transparent */
+/* Only apply to home page hero (not page-specific heroes like pricing/gallery/contact) */
+.hero:not(.hero-pricing):not(.hero-gallery):not(.hero-contact):not(.hero-about) h1,
+.hero:not(.hero-pricing):not(.hero-gallery):not(.hero-contact):not(.hero-about) .hero-subtitle,
+.hero:not(.hero-pricing):not(.hero-gallery):not(.hero-contact):not(.hero-about) .btn-primary,
+.hero:not(.hero-pricing):not(.hero-gallery):not(.hero-contact):not(.hero-about) .eyebrow-text,
+.section-title,
+.eyebrow-text,
+.about-text h3 {
+    opacity: 0;
+}
+
+/* Images and cards only start transparent when they have fade-in class */
+.photos-section .photo-item img.fade-in,
+.reviews-section .review-card.fade-in,
+.locations-section .location-card.fade-in,
+.contact-section .info-card.fade-in {
+    opacity: 0;
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 2.3s cubic-bezier(0.19, 1, 0.22, 1), transform 2.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.fade-in-up.is-visible {
+    opacity: 1 !important;
+    transform: translateY(0);
+}
+
+/* Ensure home page hero elements become visible when animated */
+.hero:not(.hero-pricing):not(.hero-gallery):not(.hero-contact):not(.hero-about) h1.fade-in-up.is-visible,
+.hero:not(.hero-pricing):not(.hero-gallery):not(.hero-contact):not(.hero-about) .hero-subtitle.fade-in-up.is-visible,
+.hero:not(.hero-pricing):not(.hero-gallery):not(.hero-contact):not(.hero-about) .eyebrow-text.fade-in-up.is-visible,
+.hero:not(.hero-pricing):not(.hero-gallery):not(.hero-contact):not(.hero-about) .btn-primary.fade-in-up.is-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: opacity 2.3s cubic-bezier(0.19, 1, 0.22, 1), transform 2.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.fade-in-left.is-visible {
+    opacity: 1 !important;
+    transform: translateX(0);
+}
+
+.fade-in-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 2.3s cubic-bezier(0.19, 1, 0.22, 1), transform 2.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.fade-in-right.is-visible {
+    opacity: 1 !important;
+    transform: translateX(0);
+}
+
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.7s ease-out;
+}
+
+.fade-in.is-visible,
+.photos-section .photo-item img.fade-in.is-visible,
+.reviews-section .review-card.fade-in.is-visible,
+.locations-section .location-card.fade-in.is-visible,
+.contact-section .info-card.fade-in.is-visible {
+    opacity: 1;
 }
 
 .hero h1 {
@@ -480,6 +598,191 @@ h2 {
     color: white;
 }
 
+/* Experience Banner */
+.experience-banner {
+    background: #000000;
+    padding: 40px 0;
+    border-top: 1px solid #fbbf24;
+    border-bottom: 1px solid #fbbf24;
+    position: relative;
+    overflow: hidden;
+}
+
+.experience-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bubble-gradient);
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.experience-banner::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+.experience-banner .container {
+    position: relative;
+    z-index: 1;
+}
+
+.experience-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.experience-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUpBanner 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUpBanner {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.experience-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.experience-item:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.experience-item:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+.experience-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(59, 130, 246, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.experience-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bubble-gradient);
+    border-radius: 12px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.experience-icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: white;
+    fill: none;
+}
+
+.experience-item:hover .experience-icon {
+    background: var(--water-gradient);
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.experience-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.experience-years {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.experience-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.stars-divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUpBanner 0.8s ease-out 0.2s forwards;
+    transition: all 0.3s ease;
+}
+
+.stars-divider:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(251, 191, 36, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+}
+
+.stars {
+    font-size: 2rem;
+    color: #fbbf24;
+    letter-spacing: 6px;
+    text-shadow: 0 2px 8px rgba(251, 191, 36, 0.5);
+    line-height: 1;
+}
+
+.stars-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
 /* Section Styles */
 .eyebrow-text {
     font-size: 0.875rem;
@@ -522,11 +825,16 @@ h2 {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 100px;
-    height: 5px;
+    width: 0;
+    height: 4px;
     background: var(--water-gradient);
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    transition: width 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.section-title.underline-visible::after {
+    width: 30%;
 }
 
 
@@ -814,23 +1122,24 @@ h2 {
     margin-top: 50px;
 }
 
+
 .feature-card {
-    background: rgba(45, 55, 72, 0.9);
+    background: rgba(255, 255, 255, 0.08);
     padding: 40px 30px;
     border-radius: 16px;
     text-align: center;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     animation: fadeInUp 0.6s ease-out;
 }
 
 .feature-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    background: rgba(45, 55, 72, 0.95);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(59, 130, 246, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 @keyframes fadeInUp {
@@ -873,8 +1182,9 @@ h2 {
 }
 
 .feature-card:hover .feature-icon {
+    background: var(--water-gradient);
     transform: scale(1.1) rotate(5deg);
-    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
 }
 
 .feature-card h4 {
@@ -1134,11 +1444,27 @@ h2 {
 .photos-section {
     padding: 80px 0;
     background: #000000;
+    position: relative;
+}
+
+.photos-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-image: url('images/splash1.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    position: relative;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
+.photos-section.bg-fade-in::after {
+    opacity: 1;
 }
 
 .photos-section::before {
@@ -1149,12 +1475,12 @@ h2 {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.7);
-    z-index: 0;
+    z-index: 1;
 }
 
 .photos-section .container {
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .photos-section .section-title {
@@ -1563,6 +1889,7 @@ h2 {
     stroke-width: 2;
 }
 
+
 .quick-info-icon:hover {
     transform: scale(1.1);
     background: var(--water-gradient);
@@ -1573,8 +1900,11 @@ h2 {
 }
 
 .info-card-primary .quick-info-icon svg {
-    stroke: transparent;
-    fill: white;
+    stroke: white !important;
+    fill: none !important;
+    stroke-width: 2.5 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
 }
 
 .info-card-primary .quick-info-icon:hover {
@@ -1658,10 +1988,6 @@ h2 {
     width: 32px;
     height: 32px;
     fill: currentColor;
-}
-
-.info-card-primary .quick-info-icon svg {
-    fill: white;
 }
 
 .email a {
@@ -1840,7 +2166,7 @@ h2 {
 }
 
 .locations-section.has-bg .eyebrow-text {
-    color: var(--primary-color);
+    color: white;
 }
 
 .locations-section.has-bg .location-address {
@@ -1861,16 +2187,19 @@ h2 {
 
 .locations-section .section-title {
     text-align: right;
+    opacity: 1;
 }
 
 .locations-section .section-title::after {
     left: auto;
     right: 0;
     transform: none;
+    width: 30%;
 }
 
 .locations-section .eyebrow-text {
     text-align: right;
+    opacity: 1;
 }
 
 .locations-grid {
@@ -1888,17 +2217,20 @@ h2 {
     text-align: center;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     position: relative;
     overflow: hidden;
 }
 
 .locations-section.has-bg .location-card {
-    border: 2px solid white;
+    border-color: white;
 }
 
 .locations-section.has-bg .location-card:hover {
-    border: 2px solid var(--primary-color);
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .location-card::before {
@@ -1921,6 +2253,9 @@ h2 {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2);
     border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .location-card > * {
@@ -2317,6 +2652,47 @@ h2 {
         display: flex;
     }
 
+    /* Center left/right aligned headings on tablet */
+    .reviews-section .section-title,
+    .photos-section .section-title,
+    .locations-section .section-title {
+        text-align: center;
+    }
+
+    .reviews-section .section-title::after,
+    .photos-section .section-title::after,
+    .locations-section .section-title::after {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
+
+    .reviews-section .eyebrow-text,
+    .photos-section .eyebrow-text,
+    .locations-section .eyebrow-text {
+        text-align: center;
+    }
+
+    .hero {
+        min-height: 70vh;
+    }
+
+    .experience-banner {
+        padding: 35px 0;
+    }
+
+    .experience-content {
+        gap: 30px;
+    }
+
+    .experience-item {
+        padding: 12px 20px;
+    }
+
+    .experience-years {
+        font-size: 2rem;
+    }
+
     .nav-logo img {
         height: 75px;
         max-width: 225px;
@@ -2590,6 +2966,78 @@ h2 {
 
     .hero {
         padding: 64px 0;
+        min-height: 65vh;
+    }
+
+    /* Center left/right aligned headings on mobile */
+    .reviews-section .section-title,
+    .photos-section .section-title,
+    .locations-section .section-title {
+        text-align: center;
+    }
+
+    .reviews-section .section-title::after,
+    .photos-section .section-title::after,
+    .locations-section .section-title::after {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
+
+    .reviews-section .eyebrow-text,
+    .photos-section .eyebrow-text,
+    .locations-section .eyebrow-text {
+        text-align: center;
+    }
+
+    .experience-banner {
+        padding: 30px 0;
+    }
+
+    .experience-content {
+        gap: 20px;
+        flex-direction: column;
+    }
+
+    .experience-item {
+        padding: 12px 20px;
+        gap: 12px;
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+
+    .experience-icon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .experience-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .experience-years {
+        font-size: 1.8rem;
+    }
+
+    .experience-label {
+        font-size: 0.75rem;
+    }
+
+    .stars-divider {
+        padding: 12px 25px;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .stars {
+        font-size: 1.6rem;
+        letter-spacing: 4px;
+    }
+
+    .stars-label {
+        font-size: 0.75rem;
     }
 
     .stats-grid {
