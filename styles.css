@@ -1283,6 +1283,8 @@ h2 {
     position: relative;
     mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
 }
 
 .review-card {
@@ -1294,18 +1296,32 @@ h2 {
     box-shadow: var(--shadow);
     text-align: center;
     flex-shrink: 0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: none;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     margin: 0 6px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    pointer-events: none;
+    cursor: default;
 }
 
 .review-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    transform: none;
+    box-shadow: var(--shadow);
+}
+
+.review-card * {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .review-stars {
@@ -3015,9 +3031,9 @@ h2 {
     }
 
     .review-card {
-        min-width: 100% !important;
-        width: 100% !important;
-        padding: 15px 18px !important;
+        min-width: 85% !important;
+        width: 85% !important;
+        padding: 25px 20px !important;
         justify-content: flex-start !important;
     }
 
@@ -3028,11 +3044,11 @@ h2 {
     }
 
     .review-text {
-        font-size: 0.76rem !important;
-        line-height: 1.4 !important;
-        margin-bottom: 10px !important;
+        font-size: 0.85rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 15px !important;
         padding: 0 5px !important;
-        max-height: 180px !important;
+        max-height: 280px !important;
         overflow: hidden !important;
     }
 
@@ -3042,8 +3058,8 @@ h2 {
     }
 
     .review-author {
-        padding-top: 8px !important;
-        margin-top: 8px !important;
+        padding-top: 12px !important;
+        margin-top: 10px !important;
         margin-bottom: 0 !important;
         border-top-width: 1px !important;
         flex-shrink: 0 !important;
@@ -3200,6 +3216,7 @@ h2 {
     .contact-section .container {
         padding-left: 15px !important;
         padding-right: 15px !important;
+        max-width: 100% !important;
     }
 
     .contact-wrapper {
@@ -3208,6 +3225,35 @@ h2 {
         margin: 0 auto !important;
         padding-left: 0 !important;
         padding-right: 0 !important;
+        justify-items: center !important;
+    }
+
+    .contact-form-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .contact-form {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .contact-info {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .info-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     /* Modal responsive styles */

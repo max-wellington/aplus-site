@@ -99,18 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
             animationId = requestAnimationFrame(infiniteScroll);
         }
         
-        // Pause on touch start (mobile)
-        reviewsCarousel.addEventListener('touchstart', () => {
-            isPaused = true;
-        });
-        
-        reviewsCarousel.addEventListener('touchend', () => {
-            // Resume after a short delay
-            setTimeout(() => {
-                isPaused = false;
-            }, 500);
-        });
-        
         // Start infinite scroll
         infiniteScroll();
         
