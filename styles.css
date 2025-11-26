@@ -2716,7 +2716,7 @@ h2 {
         box-shadow: var(--shadow);
         opacity: 0;
         visibility: hidden;
-        transition: all 0.3s ease;
+        transition: all 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease;
         gap: 15px;
         border-radius: 0;
         align-items: center;
@@ -2727,6 +2727,13 @@ h2 {
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
+    }
+
+    /* Mobile menu when navbar is scrolled - apply blur effect */
+    .navbar.scrolled .nav-menu {
+        background: rgba(255, 255, 255, 0.85) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
     }
 
     .nav-menu.active {
@@ -2740,6 +2747,20 @@ h2 {
         background: white;
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
+    }
+
+    /* When menu is open when scrolled, keep blur effect */
+    .navbar.scrolled .nav-menu.active {
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+    }
+
+    /* Ensure navbar also maintains blur when menu is open and scrolled */
+    .navbar.scrolled.menu-open {
+        background: rgba(255, 255, 255, 0.85) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
     }
 
     .navbar:not(.scrolled).menu-open {
