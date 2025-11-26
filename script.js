@@ -45,136 +45,85 @@ document.addEventListener('DOMContentLoaded', function() {
         setInterval(nextSlide, 5000);
     }
 
-    // Reviews Carousel
+    // Reviews Carousel - Infinite Auto-Scrolling
     const reviewsCarousel = document.getElementById('reviewsCarousel');
-    const reviewsPrev = document.getElementById('reviewsPrev');
-    const reviewsNext = document.getElementById('reviewsNext');
-    const reviewsDots = document.getElementById('reviewsDots');
-    let currentReviewIndex = 0;
     
     if (reviewsCarousel) {
         const reviewCards = reviewsCarousel.querySelectorAll('.review-card');
         const totalReviews = reviewCards.length;
         
-        function getReviewsPerView() {
-            if (window.innerWidth <= 480) return 1;
-            if (window.innerWidth <= 768) return 2;
-            return 3;
-        }
+        // Clone all review cards to create seamless infinite loop
+        reviewCards.forEach(card => {
+            const clone = card.cloneNode(true);
+            reviewsCarousel.appendChild(clone);
+        });
         
-        let reviewsPerView = getReviewsPerView();
-        let totalGroups = Math.ceil(totalReviews / reviewsPerView);
+        // Duplicate once more for smoother infinite scroll
+        reviewCards.forEach(card => {
+            const clone = card.cloneNode(true);
+            reviewsCarousel.appendChild(clone);
+        });
         
-        function updateDots() {
-            if (reviewsDots) {
-                reviewsDots.innerHTML = '';
-                for (let i = 0; i < totalGroups; i++) {
-                    const dot = document.createElement('div');
-                    dot.className = 'review-dot';
-                    if (i === 0) dot.classList.add('active');
-                    dot.addEventListener('click', () => goToReviewGroup(i));
-                    reviewsDots.appendChild(dot);
-                }
+        let scrollPosition = 0;
+        const scrollSpeed = 0.5; // pixels per frame (adjust for speed)
+        let animationId = null;
+        let isPaused = false;
+        
+        function getCardWidth() {
+            const firstCard = reviewsCarousel.querySelector('.review-card');
+            if (firstCard) {
+                return firstCard.offsetWidth + 20; // Include margin
             }
+            return 0;
         }
         
-        updateDots();
+        function infiniteScroll() {
+            if (isPaused) {
+                animationId = requestAnimationFrame(infiniteScroll);
+                return;
+            }
+            
+            const cardWidth = getCardWidth();
+            const originalSetWidth = cardWidth * totalReviews;
+            
+            scrollPosition += scrollSpeed;
+            
+            // Reset scroll position seamlessly when we've scrolled through one full set
+            // Since we have 3 sets (original + 2 clones), we can reset when reaching the end of first set
+            if (scrollPosition >= originalSetWidth) {
+                scrollPosition = scrollPosition - originalSetWidth;
+            }
+            
+            reviewsCarousel.scrollLeft = scrollPosition;
+            
+            animationId = requestAnimationFrame(infiniteScroll);
+        }
         
-        // Update on resize
+        // Pause on touch start (mobile)
+        reviewsCarousel.addEventListener('touchstart', () => {
+            isPaused = true;
+        });
+        
+        reviewsCarousel.addEventListener('touchend', () => {
+            // Resume after a short delay
+            setTimeout(() => {
+                isPaused = false;
+            }, 500);
+        });
+        
+        // Start infinite scroll
+        infiniteScroll();
+        
+        // Handle window resize
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
-                reviewsPerView = getReviewsPerView();
-                totalGroups = Math.ceil(totalReviews / reviewsPerView);
-                currentReviewIndex = Math.min(currentReviewIndex, totalGroups - 1);
-                updateDots();
-                updateCarousel();
+                // Reset scroll position on resize to prevent issues
+                scrollPosition = 0;
+                reviewsCarousel.scrollLeft = 0;
             }, 250);
         });
-        
-        function updateCarousel() {
-            const firstCard = reviewCards[0];
-            if (firstCard) {
-                const cardWidth = firstCard.offsetWidth + 20; // Include margin
-                const scrollPosition = currentReviewIndex * cardWidth * reviewsPerView;
-                reviewsCarousel.scrollTo({
-                    left: scrollPosition,
-                    behavior: 'smooth'
-                });
-            }
-            
-            // Update dots
-            const dots = reviewsDots.querySelectorAll('.review-dot');
-            const currentGroup = Math.floor(currentReviewIndex);
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentGroup);
-            });
-        }
-        
-        function goToReviewGroup(groupIndex) {
-            if (groupIndex < 0) {
-                currentReviewIndex = totalGroups - 1;
-            } else if (groupIndex >= totalGroups) {
-                currentReviewIndex = 0;
-            } else {
-                currentReviewIndex = groupIndex;
-            }
-            updateCarousel();
-        }
-        
-        function nextReview() {
-            currentReviewIndex = (currentReviewIndex + 1) % totalGroups;
-            updateCarousel();
-        }
-        
-        function prevReview() {
-            currentReviewIndex = (currentReviewIndex - 1 + totalGroups) % totalGroups;
-            updateCarousel();
-        }
-        
-        // Button event listeners
-        if (reviewsNext) {
-            reviewsNext.addEventListener('click', nextReview);
-        }
-        
-        if (reviewsPrev) {
-            reviewsPrev.addEventListener('click', prevReview);
-        }
-        
-        // Auto-advance carousel every 6 seconds
-        let autoAdvanceInterval = setInterval(nextReview, 6000);
-        
-        // Pause auto-advance on hover
-        reviewsCarousel.addEventListener('mouseenter', () => {
-            clearInterval(autoAdvanceInterval);
-        });
-        
-        reviewsCarousel.addEventListener('mouseleave', () => {
-            autoAdvanceInterval = setInterval(nextReview, 6000);
-        });
-        
-        // Touch/swipe support for mobile
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        reviewsCarousel.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        
-        reviewsCarousel.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-        
-        function handleSwipe() {
-            if (touchEndX < touchStartX - 50) {
-                nextReview();
-            }
-            if (touchEndX > touchStartX + 50) {
-                prevReview();
-            }
-        }
     }
 
     // Check if cookies were already accepted
